@@ -2,8 +2,8 @@
   "name": "embedded-grafana",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "dev": "tsx server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "tsx": "^4.15.6",
+    "typescript": "^5.4.5"
   }
 }

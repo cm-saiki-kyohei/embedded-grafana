@@ -1,6 +1,11 @@
-const express = require('express');
+
+import express from 'express';
 
 const app = express();
+
+app.get('/health', (req, res) => {
+  res.send("Hello Express");
+});
 
 // HTMLファイルを返す
 app.get('/grafana', (req, res) => {

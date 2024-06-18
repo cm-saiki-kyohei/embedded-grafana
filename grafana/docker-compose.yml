@@ -44,19 +44,18 @@ services:
       - "GF_DEFAULT_APP_MODE=development"
       - "GF_LOG_LEVEL=debug"
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin # grants admin role to anonymous access
-      - GF_AUTH_ANONYMOUS_ENABLED=true # removes login 1/2
-      - GF_AUTH_BASIC_ENABLED=false # removes login 2/2
+      - GF_AUTH_ANONYMOUS_ENABLED=false # removes login 1/2
+      - GF_AUTH_BASIC_ENABLED=true # removes login 2/2
       - GF_FEATURE_TOGGLES_ENABLE=alertingSimplifiedRouting
       - GF_SECURITY_ALLOW_EMBEDDING=true
-      - GF_AUTH_GENERIC_OAUTH_ENABLED=true
-      - GF_AUTH_GENERIC_OAUTH_NAME=Cognito
-      - GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP=true
-      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=72btnvjii5f272agv6h0vvjft9
-      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=18sbm8ujf1fl322gsi12el4tbrahd6ss508rkb2pav8b80majbdu
-      - GF_AUTH_GENERIC_OAUTH_SCOPES=openid email profile
-      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com/oauth2/authorize
-      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com/oauth2/token
-      - GF_AUTH_GENERIC_OAUTH_API_URL=https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com/oauth2/userInfo
+      - GF_AUTH_JWT_ENABLED=true
+      - GF_AUTH_JWT_HEADER_NAME=Authorization
+      - GF_AUTH_JWT_EMAIL_CLAIM=email
+      - GF_AUTH_JWT_USERNAME_CLAIM=cognito:username
+      - GF_AUTH_JWT_JWK_SET_URL=https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com/.well-known/jwks.json
+      - GF_AUTH_JWT_CACHE_TTL=60m
+      - GF_SECURITY_COOKIE_SAMESITE=none
+      - GF_AUTH_JWT_AUTO_SIGN_UP=true # 自動ユーザー作成を有効化
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
 

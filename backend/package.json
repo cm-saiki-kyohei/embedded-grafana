@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.598.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "node-fetch": "^3.3.2"
   },

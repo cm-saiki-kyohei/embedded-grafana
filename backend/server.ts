@@ -1,16 +1,23 @@
 import express, { Request, Response } from 'express';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = 8080;
-const GRAFANA_URL = 'http://127.0.0.1:3000'
-const COGNITO_DOMAIN = 'https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com';
-const CLIENT_ID = '72btnvjii5f272agv6h0vvjft9';
-const CLIENT_SECRET = '18sbm8ujf1fl322gsi12el4tbrahd6ss508rkb2pav8b80majbdu';
-const REDIRECT_URI = 'http://localhost:8080/callback';
 
-const DASHBOARD_UID = 'bdp4ulf0c15vke';
-const ID_TOKEN = "eyJraWQiOiJ6MVAyTW9OVXo3Y3gyY2N1MkFxdUVyWFJmQ0drdlpRMWV3eTN1SnZyYW9RPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiWEJqS2hOV1RGZTRhRm1HdW5xeGVBZyIsInN1YiI6Ijk3NjRhYWI4LTAwYzEtNzA3ZC03OGZjLTdkMjY2ZjcyMDQ5ZiIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1ub3J0aGVhc3QtMS5hbWF6b25hd3MuY29tXC9hcC1ub3J0aGVhc3QtMV9hTWZuMHRUNk8iLCJjb2duaXRvOnVzZXJuYW1lIjoia3lvIiwib3JpZ2luX2p0aSI6IjgwZTdhYWY5LWQxMDEtNDFlMy05OTFiLWE3MmU5Nzc5ODI3YSIsImF1ZCI6IjcyYnRudmppaTVmMjcyYWd2NmgwdnZqZnQ5IiwiZXZlbnRfaWQiOiJhZjNhMWJkYi1hYzMxLTQyYzYtYTZiMi02YzY3NTZhOTgyZWQiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTcxODY5ODM2MSwibmFtZSI6Imt5byIsImV4cCI6MTcxODcwMTk2MSwiaWF0IjoxNzE4Njk4MzYxLCJqdGkiOiI5MmIzNjQxZi03ZjM4LTRjYjktYmVjOC1hYTRlZDY3YjQwZDAiLCJlbWFpbCI6InNhaWtpLmt5b2hlaUBjbGFzc21ldGhvZC5qcCJ9.DS2Ki_Shh8hNWLVt9tV6vAvF3JnAjHFQq0XgZuYGcnDcDDNcRdVuSL0ky6cs7Afv3XC23-ExWPI-MkfuPy2Kzxh6jZM4QBQJKvdDSmKEFU-U102UXe_omIdNk8wxKG_CIkvzlpjAWrZmV5UtSBCDIWgMZhpyoDfg6WXDtDJBu1j5XdblDJk_WbllIc1ioELyujB8BhrhUjOfP4PCHlV03IU07kcGa-ea7xC0i3pjh1eFg10z30E5F9dIuDZgWbG_DzUsHUI9m3eoFjJzGBLy90V5Zwrh_dTukSEp5mAzw28eF06k1ELTBXMO3YP5E6STmciG1ilYBzF6KvB4oUraww"
+// cognito settings
+const COGNITO_DOMAIN = process.env.COGNITO_DOMAIN!;
+const CLIENT_ID = process.env.CLIENT_ID!;
+const CLIENT_SECRET = process.env.CLIENT_SECRET!;
+const REDIRECT_URI = process.env.REDIRECT_URI!;
+
+// grafana settings
+const GRAFANA_URL = process.env.GRAFANA_URL!;
+const DASHBOARD_UID = process.env.DASHBOARD_UID!;
+
+const ID_TOKEN = process.env.ID_TOKEN!;
 
 app.get('/', (req: Request, res: Response) => {
   res.send("Hello Express");

@@ -56,6 +56,8 @@ services:
       - GF_AUTH_JWT_CACHE_TTL=60m
       # - GF_SECURITY_COOKIE_SAMESITE=none
       - GF_AUTH_JWT_AUTO_SIGN_UP=true # 自動ユーザー作成を有効化
+      - GF_SECURITY_ADMIN_USER=kyo # 自分をadmin指定しておく
+      - GF_AUTH_JWT_URL_LOGIN=true
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
 

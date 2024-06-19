@@ -77,17 +77,12 @@ app.get('/callback', async (req: Request, res: Response) => {
   }
 });
 
-app.get('/grafana', async (req: Request, res: Response) => {
-  // const idToken = req.headers['authorization'];
-  // if (!idToken) {
-  //   return res.status(401).send('Unauthorized: No JWT token provided');
-  // }
-
+app.get('/grafana', async (req, res) => {
   try {
     // Grafanaにリクエストを送信してダッシュボード情報を取得
     const grafanaResponse = await fetch(`${GRAFANA_URL}/api/dashboards/uid/${DASHBOARD_UID}`, {
       headers: {
-        'Authorization': `Bearer ${ID_TOKEN}`
+        'X-JWT-Assertion': ID_TOKEN
       }
     });
 
@@ -97,10 +92,10 @@ app.get('/grafana', async (req: Request, res: Response) => {
       throw new Error(`Failed to fetch Grafana data: ${grafanaResponse.status} ${grafanaResponse.statusText} - ${errorText}`);
     }
 
-    const grafanaData: any = await grafanaResponse.json();
+    const grafanaData = await grafanaResponse.json() as any;
 
     // パネルのURLを組み立てる
-    const panelUrl = `${GRAFANA_URL}/d-solo/${grafanaData.dashboard.uid}/${grafanaData.meta.slug}?orgId=1&from=now-6h&to=now&panelId=1`;
+    const panelUrl = `${GRAFANA_URL}/d-solo/${grafanaData.dashboard.uid}/${grafanaData.meta.slug}?orgId=1&from=now-6h&to=now&panelId=1&auth_token=${ID_TOKEN}`;
 
     // 結果のHTMLを組み立ててiframeに表示
     res.send(`
@@ -125,7 +120,6 @@ app.get('/grafana', async (req: Request, res: Response) => {
     res.status(500).send(`Error fetching Grafana data`);
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

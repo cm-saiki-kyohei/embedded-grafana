@@ -49,12 +49,12 @@ services:
       - GF_FEATURE_TOGGLES_ENABLE=alertingSimplifiedRouting
       - GF_SECURITY_ALLOW_EMBEDDING=true
       - GF_AUTH_JWT_ENABLED=true
-      - GF_AUTH_JWT_HEADER_NAME=Authorization
+      - GF_AUTH_JWT_HEADER_NAME=X-JWT-Assertion
       - GF_AUTH_JWT_EMAIL_CLAIM=email
       - GF_AUTH_JWT_USERNAME_CLAIM=cognito:username
-      - GF_AUTH_JWT_JWK_SET_URL=https://grafana-test-0617.auth.ap-northeast-1.amazoncognito.com/.well-known/jwks.json
+      - GF_AUTH_JWT_JWK_SET_URL=https://cognito-idp.ap-northeast-1.amazonaws.com/ap-northeast-1_aMfn0tT6O/.well-known/jwks.json
       - GF_AUTH_JWT_CACHE_TTL=60m
-      - GF_SECURITY_COOKIE_SAMESITE=none
+      # - GF_SECURITY_COOKIE_SAMESITE=none
       - GF_AUTH_JWT_AUTO_SIGN_UP=true # 自動ユーザー作成を有効化
     volumes:
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
